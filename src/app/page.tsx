@@ -35,11 +35,12 @@ const NFTCard = ({
           width={350}
           height={350}
           className="h-auto w-full rounded-[8px]"
+          priority
         />
         <div className="absolute inset-0 flex items-center justify-center rounded-[8px] bg-fem-cyan bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <Image
             src="/images/icon-view.svg"
-            alt=""
+            alt="View NFT"
             width={48}
             height={48}
             aria-hidden="true"
@@ -56,7 +57,7 @@ const NFTCard = ({
         <span className="flex items-center font-semibold text-fem-cyan">
           <Image
             src="/images/icon-ethereum.svg"
-            alt=""
+            alt="Ethereum icon"
             width={11}
             height={18}
             className="mr-2"
@@ -66,7 +67,7 @@ const NFTCard = ({
         <span className="flex items-center text-fem-soft-blue">
           <Image
             src="/images/icon-clock.svg"
-            alt=""
+            alt="Time left icon"
             width={16}
             height={16}
             className="mr-2"
