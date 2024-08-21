@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import {
   Card,
   CardContent,
@@ -8,66 +7,101 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
+interface NFTCardProps {
+  imageUrl: string;
+  title: string;
+  description: string;
+  price: string;
+  timeLeft: string;
+  creatorName: string;
+  creatorAvatarUrl: string;
+}
+
+const NFTCard = ({
+  imageUrl,
+  title,
+  description,
+  price,
+  timeLeft,
+  creatorName,
+  creatorAvatarUrl,
+}: NFTCardProps) => (
+  <Card className="w-[350px] space-y-6 rounded-[15px] border-none bg-fem-very-dark-blue-card-bg p-6 text-white">
+    <CardHeader className="p-0">
+      <div className="group relative cursor-pointer">
+        <Image
+          alt={`${title} NFT`}
+          src={imageUrl}
+          width={350}
+          height={350}
+          className="h-auto w-full rounded-[8px]"
+        />
+        <div className="absolute inset-0 flex items-center justify-center rounded-[8px] bg-fem-cyan bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <Image
+            src="/images/icon-view.svg"
+            alt=""
+            width={48}
+            height={48}
+            aria-hidden="true"
+          />
+        </div>
+      </div>
+    </CardHeader>
+    <CardContent className="space-y-6 p-0">
+      <h2 className="cursor-pointer text-xl font-semibold hover:text-fem-cyan">
+        {title}
+      </h2>
+      <p className="text-fem-soft-blue">{description}</p>
+      <div className="flex justify-between">
+        <span className="flex items-center font-semibold text-fem-cyan">
+          <Image
+            src="/images/icon-ethereum.svg"
+            alt=""
+            width={11}
+            height={18}
+            className="mr-2"
+          />
+          {price}
+        </span>
+        <span className="flex items-center text-fem-soft-blue">
+          <Image
+            src="/images/icon-clock.svg"
+            alt=""
+            width={16}
+            height={16}
+            className="mr-2"
+          />
+          {timeLeft}
+        </span>
+      </div>
+    </CardContent>
+    <CardFooter className="flex items-center space-x-4 p-0">
+      <Avatar className="border border-white">
+        <AvatarImage src={creatorAvatarUrl} alt={creatorName} />
+        <AvatarFallback>{creatorName[0]}</AvatarFallback>
+      </Avatar>
+      <p className="text-fem-soft-blue">
+        Creation of{" "}
+        <span className="cursor-pointer text-white hover:text-fem-cyan">
+          {creatorName}
+        </span>
+      </p>
+    </CardFooter>
+  </Card>
+);
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <Card className="w-[350px] space-y-6 rounded-[15px] border-none bg-fem-very-dark-blue-card-bg p-6 text-white">
-        <CardHeader className="p-0">
-          <Image
-            alt="Equilibrium NFT image"
-            src="/images/image-equilibrium.jpg"
-            width={350}
-            height={350}
-            className="h-auto w-full rounded-[8px]"
-          />
-        </CardHeader>
-        <CardContent className="space-y-6 p-0">
-          <section className="space-y-4">
-            <h2 className="text-[22px] font-semibold">Equilibrium #3429</h2>
-            <p className="text-[18px] text-fem-soft-blue">
-              Our Equilibrium collection promotes balance and calm.
-            </p>
-          </section>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Image
-                alt="Ethereum icon"
-                src="/images/icon-ethereum.svg"
-                width={11}
-                height={18}
-              />
-              <span className="text-base font-bold text-fem-cyan">
-                0.041 ETH
-              </span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Image
-                alt="clock icon"
-                src="/images/icon-clock.svg"
-                width={16}
-                height={16}
-              />
-              <span className="text-base text-fem-soft-blue">3 days left</span>
-            </div>
-          </div>
-        </CardContent>
-        <CardFooter className="flex flex-col space-y-4 p-0">
-          <hr className="w-full border-fem-very-dark-blue-line" />
-          <div className="flex w-full items-center space-x-3">
-            <Avatar className="border border-white">
-              <AvatarImage
-                src="/images/image-avatar.png"
-                alt="Creator's avatar"
-              />
-              <AvatarFallback>JW</AvatarFallback>
-            </Avatar>
-            <div>
-              <span className="text-fem-soft-blue">Creation of</span>{" "}
-              <span className="text-white">Jules Wyvern</span>
-            </div>
-          </div>
-        </CardFooter>
-      </Card>
+    <main className="flex min-h-screen items-center justify-center p-6">
+      <NFTCard
+        imageUrl="/images/image-equilibrium.jpg"
+        title="Equilibrium #3429"
+        description="Our Equilibrium collection promotes balance and calm."
+        price="0.041 ETH"
+        timeLeft="3 days left"
+        creatorName="Jules Wyvern"
+        creatorAvatarUrl="/images/image-avatar.png"
+      />
     </main>
   );
 }
